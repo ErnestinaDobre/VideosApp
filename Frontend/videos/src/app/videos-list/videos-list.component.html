@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<div>
+
+    <input type="text" (keyup)="search($event)" placeholder="Search by video title" [(ngModel)]="query_conversation">
+    <input type="text" [(ngModel)]="searchHighlightKeyword" placeholder="Search title with highlight">
+    <table>
+        <thead>
+            <tr>
+                <th [appSort]="videos" data-order="desc" data-name="id" scope="col">ID</th>
+                <th [appSort]="videos" data-order="desc" data-name="title" scope="col">Title</th>
+                <th [appSort]="videos" data-order="desc" data-name="synopsis" scope="col">Synopsis</th>
+                <th>Video link</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let video of videos">
+                <td>
+                    {{video.id}}
+                </td>
+                <td>
+                    <div appHighlight [content]="video.title" [searchTerm]="searchHighlightKeyword"
+                        [caseSensitive]="false">
+                        {{video.title}}
+                    </div>
+                </td>
+                <td>
+                    {{video.synopsis}}
+                </td>
+                <td>
+
+                    <button (click)="showVideo(video)">Show/Hide embedded video</button>
+                    <div *ngIf="video.toDisplay">
+                        <iframe width="340" height="220" [src]="embeddedVideoURLSanitizer(video.link)">
+                        </iframe>
+                    </div>
+
+                </td>
+                <td>
+                    <button *ngIf="!video.status || video.status == 'dislike'" (click)="likeDislike('like', video)"
+                        style="color: darkblue;"><i class="fa fa-thumbs-up"></i>Like</button>
+                    <button *ngIf="!video.status || video.status == 'like'" (click)="likeDislike('dislike', video)"
+                        style="color: darkred;"><i class="fa fa-thumbs-down"></i>Dislike</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    Number of videos per page:
+    <select [(ngModel)]="optiuneSelect" (change)="filterChanged($event.target.value)">
+        <option *ngFor="let type of filterTypes" [value]="type.value">{{type.display}}
+        </option>
+    </select>
+    Optiune selectata: {{optiuneSelect}}<br>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Synopsis</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: add button for cancel -->
+            <tr *ngFor="let video of videosWithPagination">
+                <td>
+                    {{video.id}}
+                </td>
+
+                <td>
+                    <!-- <span *ngIf="!video.isEditing">{{video.title}}</span> -->
+                    <div *ngIf="video.isEditing; else afisareTextSimpluTitle">
+                        <input [(ngModel)]="video.title" value="{{video.title}}">
+                    </div>
+                    <ng-template #afisareTextSimpluTitle>
+                        {{video.title}}
+                    </ng-template>
+                   
+                </td>
+                <td>
+                    <!-- <span *ngIf="!video.isEditing">{{video.synopsis}}</span> -->
+                    <div *ngIf="video.isEditing; else afisareTextSimpluSynopsis">
+                        <input [(ngModel)]="video.synopsis" value="{{video.synopsis}}">
+                    </div>
+                    <ng-template #afisareTextSimpluSynopsis>
+                        {{video.synopsis}}
+                    </ng-template>
+                </td>
+
+                <td>
+                    <button (click)="delVid(video)">Delete</button>
+                    <button *ngIf="!video.isEditing" (click)="enableEdit(video)">Enable edit</button>
+                    <button *ngIf="video.isEditing" (click)="edit(video)">Edit - save to server</button>
+                    <button *ngIf="video.isEditing" (click)="cancel(video)">Cancel</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- [disabled]="clickedPrevDisabled" -->
+    <button (click)="prevBtn()" [class]="clickedPrevDisabled ? 'hidden' : 'not-hidden'" id='prevBtn'>Prev</button>
+    <button type="button" [disabled]="clicked" (click)="nextBtn()">Next</button>
+
+    <ul>
+        <li>TODO: add functionality for adding a video; pagination should refresh</li>
+        <li>TODO: add a "categories" table: id, name; functionalitate pentru add, remove, edit</li>
+    </ul>
+</div>

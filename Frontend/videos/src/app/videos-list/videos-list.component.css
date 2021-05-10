@@ -1,0 +1,13 @@
+button {
+    border-radius: 5px;
+}
+p {
+    font-family: Lato;
+  }
+  ::ng-deep .text-highlight {
+    background: yellow;
+  }
+  
+button.hidden{
+  display: none;
+}

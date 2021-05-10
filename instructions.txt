@@ -1,0 +1,15 @@
+Install Json-Server through npm:
+	npm install -g json-server
+
+	https://github.com/typicode/json-server
+
+Place the db.json file in a specific folder, open a command line in said folder, and run the following command:
+	json-server --watch db.json
+
+	This will start the server on the default port of 3000
+
+Install the angular dependencies:
+	npm install 
+	in the folder that contains package.json
+Start the angular application:
+	ng serve
