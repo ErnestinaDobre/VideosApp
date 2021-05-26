@@ -240,4 +240,22 @@ export class VideosListComponent implements OnInit {
     console.log('enabling edit for: ', video);
   }
 
+  addNew(name: string){
+    let vid = {
+      title: name
+    }
+
+    this.videoDataService.addNewVideo(vid)
+    .subscribe(
+      rez => {
+        this.videoDataService.findPage(this.currentPage, this.optiuneSelect)
+      .subscribe(
+        rez => {
+          this.videosWithPagination = rez;
+          this.pagesLoadedMap.set(this.currentPage, this.videosWithPagination);
+        }
+      )
+      }
+    )
+  }
 }

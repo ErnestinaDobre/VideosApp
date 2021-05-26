@@ -95,6 +95,7 @@
                     <button (click)="delVid(video)">Delete</button>
                     <button *ngIf="!video.isEditing" (click)="enableEdit(video)">Enable edit</button>
                     <button *ngIf="video.isEditing" (click)="edit(video)">Edit - save to server</button>
+               
                     <button *ngIf="video.isEditing" (click)="cancel(video)">Cancel</button>
                 </td>
             </tr>
@@ -104,8 +105,13 @@
     <button (click)="prevBtn()" [class]="clickedPrevDisabled ? 'hidden' : 'not-hidden'" id='prevBtn'>Prev</button>
     <button type="button" [disabled]="clicked" (click)="nextBtn()">Next</button>
 
-    <ul>
-        <li>TODO: add functionality for adding a video; pagination should refresh</li>
-        <li>TODO: add a "categories" table: id, name; functionalitate pentru add, remove, edit</li>
-    </ul>
+<tr>
+    <div>
+        <input placeholder="Insert new video title" [(ngModel)] = 'name'>
+    </div>
+</tr>
+<td>
+    <button (click)="addNew(name)">Add new video</button>
+</td>
+    
 </div>

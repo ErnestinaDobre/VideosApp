@@ -35,4 +35,8 @@ export class VideoDataService {
   editEntry(video : Video){
     return this.httpClient.patch(`${this.SERVER_PATH}/videos/${video.id}`, video);
   }
+
+  addNewVideo(video: any){
+    return this.httpClient.post(`${this.SERVER_PATH}/videos/`, video);
+  }
 }
