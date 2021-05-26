@@ -48,7 +48,7 @@ export class VideosListComponent implements OnInit {
           this.initialVideos  = rez;
           this.videos.forEach(video => video['toDisplay']= false);
 
-          this.filterTypes[3].value = rez.length; // What's my other option, this seems wrong, but it works
+          this.filterTypes[3].value = rez.length; 
           console.log('videos: ', this.videos)
         }
       )
