@@ -463,7 +463,4 @@ export class VideosListComponent implements OnInit {
   
   }
   
-  // TODO: autocomplete pentru filter -- DONE
-  // TODO: filtru pentru categorie cu radio (just one) -- DONE
-  // TODO: can we bypass one of these for-s? line 155 -- DONE (if it's ok with map)
 }
