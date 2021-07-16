@@ -1,0 +1,35 @@
+<h1>Categories</h1>
+<!-- TODO: add, remove, edit -->
+<div>
+  <input type="text" placeholder="Insert new category title" [(ngModel)] = 'name'>
+</div>
+<div>
+    
+<button (click) = 'addNewCat(name)'>Add new category</button>
+
+
+</div>
+
+<div id="genre">
+  <tr *ngFor="let category of categoriesShown">
+    <td>
+        {{category.id}}.
+        &nbsp;
+    </td> 
+   
+    <td *ngIf="category.editing; else showSimple">
+      <input [(ngModel)]="category.title" value="{{category.title}}">
+      <button (click) = 'editCat(category)'>Save my changes</button>
+      <button (click)="cancel(category)">Cancel changes</button>
+    </td> 
+    <ng-template #showSimple>
+      {{category.title}}
+      &nbsp;
+  </ng-template> 
+    <button *ngIf="!category.editing" (click)="enableEditing(category)">Edit</button>
+    
+    <button (click) = 'removeCat(category)'>Remove</button>
+</div>
+
+
+

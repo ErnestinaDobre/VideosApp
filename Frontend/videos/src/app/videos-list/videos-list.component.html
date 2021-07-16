@@ -1,13 +1,24 @@
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<div id="hola" class="black">
+<mat-slide-toggle [style.backgroundColor]="!checked ? 'pink': 'black'" style="width: 250px; border-radius: 10px;"  (click)='changing()'>Switch to dark Barbie theme</mat-slide-toggle>
+<app-titlu class='elementID' [titlul]="'Hello'"></app-titlu>
 
 <div>
 
-    <input type="text" (keyup)="search($event)" placeholder="Search by video title" [(ngModel)]="query_conversation">
+    <select [(ngModel)]="selectedCategory" (change)="onChangeCategorie($event)">
+        <option value="" disabled>Select your genre</option>
+        <option [ngValue]="null">All</option>
+        <option *ngFor="let cat of categoriesForSelect" [ngValue] = "cat">{{cat.title}}</option>
+        
+    </select>
+
+    <input type="text" (keyup)="search($event)" placeholder="Search by video title">
     <input type="text" [(ngModel)]="searchHighlightKeyword" placeholder="Search title with highlight">
     <table>
         <thead>
             <tr>
-                <th [appSort]="videos" data-order="desc" data-name="id" scope="col">ID</th>
+                <th [appSort]="videos" data-order="desc" data-name="id" scope="col">ID</th> <!--de unde vine acest [appSort]-->
                 <th [appSort]="videos" data-order="desc" data-name="title" scope="col">Title</th>
                 <th [appSort]="videos" data-order="desc" data-name="synopsis" scope="col">Synopsis</th>
                 <th>Video link</th>
@@ -15,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let video of videos">
+            <tr *ngFor="let video of displayedVideos">
                 <td>
                     {{video.id}}
                 </td>
@@ -107,7 +118,12 @@
 
 <tr>
     <div>
-        <input placeholder="Insert new video title" [(ngModel)] = 'name'>
+
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Insert new video title</mat-label>
+            <input  [(ngModel)] = 'name' matInput placeholder="E.g. ID">
+          </mat-form-field>
     </div>
 </tr>
 <td>
@@ -115,3 +131,95 @@
 </td>
     
 </div>
+
+<!-- de adaugat un tabel pentru videos, cum e https://material.angular.io/components/table/overview -->
+<table mat-table [dataSource]="displayedVideos" class="mat-elevation-z8">
+<!-- Id Definition -->
+    <ng-container cdkColumnDef="id">
+        <th mat-header-cell *cdkHeaderCellDef> ID </th>
+        <td mat-cell *cdkCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+ <!-- Title Definition -->
+ <ng-container cdkColumnDef="title">
+    <th mat-header-cell *cdkHeaderCellDef> 
+        Title
+    </th>
+    <td mat-cell *cdkCellDef="let row"> 
+    <div *ngIf="!row.isEditing; else inputTitle">
+        <span *ngIf="shouldDisplayVideo(row)">X</span>
+        {{row.title}}
+    </div>
+    <ng-template #inputTitle>
+        <input matInput placeholder="Ex. Pizza" [(ngModel)]="row.title">
+    </ng-template>
+    
+</td>
+</ng-container>
+
+
+
+    <!-- Synopsis Definition -->
+    <ng-container cdkColumnDef="synopsis">
+      <th mat-header-cell *cdkHeaderCellDef> Synopsis </th>
+      <td mat-cell *cdkCellDef="let row"> {{row.synopsis}} </td>
+    </ng-container>
+  <!-- Actions Definition -->
+  <ng-container cdkColumnDef="actions">
+    <th mat-header-cell *cdkHeaderCellDef> Actions </th>
+    <td mat-cell *cdkCellDef="let row">
+        <button mat-button  (click)="openDialog(row)">Delete</button>
+        <button mat-raised-button *ngIf="!row.isEditing" (click)="enableEdit(row)">Enable edit</button>
+        <button mat-button *ngIf="row.isEditing" (click)="edit(row)">Edit - save to server</button>
+        <button mat-button *ngIf="row.isEditing" (click)="cancel(row)">Cancel</button>
+    </td>
+    
+  </ng-container>
+  <!-- <button (click)="delVid(row)">Delete</button> -->
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *cdkHeaderRowDef="['id','title', 'synopsis','actions']"></tr>
+    <tr mat-row *cdkRowDef="let row; columns: ['id','title', 'synopsis', 'actions']"></tr>
+  </table>
+
+  <app-titlu [titlul]="'Goodbye'"></app-titlu>
+  <span class="example-list-section">
+    <ul>
+      <li *ngFor="let cat of categoriesForSelect" style="list-style: none;">
+        <mat-checkbox [(ngModel)]="cat.completed"
+        (ngModelChange)="filtrareVideoCat()">
+          {{cat.title}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+
+  <label id="example-radio-group-label">Pick your favorite genre</label>
+<mat-radio-group
+
+  [(ngModel)]="favoriteGenre">
+  <ul>
+      <li *ngFor="let genre of categoriesForSelect" style="list-style: none;">
+  <mat-radio-button [value]="genre.title">
+    {{genre.title}}
+  </mat-radio-button>
+</li>
+</ul>
+</mat-radio-group> 
+<div>Your favorite genre is: {{favoriteGenre}}</div>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Genre</mat-label>
+      <input type="text"
+             placeholder="Pick one genre"
+             aria-label="Genre"
+             matInput
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let genre of categoriesForSelect" [value]="genre.title">
+          {{genre.title}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>
+<app-compbuton (evenimentClickBtnChild)="clickBtnApelatCandEvent($event)"></app-compbuton>

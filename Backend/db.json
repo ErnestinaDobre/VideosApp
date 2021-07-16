@@ -2,68 +2,104 @@
   "videos": [
     {
       "id": 1,
-      "title": "Watermelon A Cautionary Tale",
-      "synopsis": "Watermelon leaves1",
-      "link": "https://www.youtube.com/embed/lTxn2BuqyzU",
+      "title": "wtvr",
+      "synopsis": "video about some other test",
+      "link": "https://www.youtube.com/embed/nc5Lj90BzSQ",
       "status": null,
-      "toDisplay": false
+      "idCategory": 1
     },
     {
       "id": 2,
-      "title": "Thatching Eggs hey",
+      "title": "Thatching Eggs",
       "synopsis": "video about some other test",
       "link": "https://www.youtube.com/embed/nc5Lj90BzSQ",
-      "status": null
+      "status": null,
+      "idCategory": 1,
+      "toDisplay": false
     },
     {
-      "id": 4,
+      "id": 3,
       "title": "UMBRELLA 5",
       "synopsis": "video about some other test",
       "link": "https://www.youtube.com/embed/Bl1FOKpFY2Q",
-      "status": null
+      "status": null,
+      "idCategory": 1
     },
     {
-      "id": 6,
-      "title": "Float",
-      "synopsis": "video about some other test",
-      "link": "https://www.youtube.com/embed/1HAGuju_yKY",
-      "status": null
-    },
-    {
-      "id": 7,
+      "id": 4,
       "title": "In a Heartbeat",
       "synopsis": "video about some test",
       "link": "https://www.youtube.com/embed/2REkk9SCRn0",
-      "status": null
+      "status": null,
+      "idCategory": 2
+    },
+    {
+      "id": 5,
+      "title": "Here's the Plan",
+      "synopsis": "video about some other test",
+      "link": "https://www.youtube.com/embed/5Zqmt1H35fs",
+      "status": null,
+      "idCategory": 2
+    },
+    {
+      "id": 6,
+      "title": "Pip",
+      "synopsis": "video about some test",
+      "link": "https://www.youtube.com/embed/07d2dXHYb94",
+      "status": null,
+      "idCategory": 2
+    },
+    {
+      "id": 7,
+      "title": "Mom",
+      "synopsis": "video about some test",
+      "link": "https://www.youtube.com/embed/HpoVwhSVI38",
+      "status": null,
+      "idCategory": 2
+    },
+    {
+      "id": 8,
+      "title": "Wind",
+      "synopsis": "video about some other test",
+      "link": "https://www.youtube.com/embed/EpaLbYFVfbQ",
+      "status": null,
+      "toDisplay": null,
+      "id_category": 1,
+      "idCategory": 2
     },
     {
       "id": 9,
       "title": "Here's the Plan",
       "synopsis": "video about some other test",
       "link": "https://www.youtube.com/embed/5Zqmt1H35fs",
-      "status": null
-    },
-    {
-      "id": 10,
-      "title": "Pip",
-      "synopsis": "video about some test",
-      "link": "https://www.youtube.com/embed/07d2dXHYb94",
-      "status": null
-    },
-    {
-      "id": 11,
-      "title": "Mom",
-      "synopsis": "video about some test",
-      "link": "https://www.youtube.com/embed/HpoVwhSVI38",
-      "status": null
-    },
-    {
-      "id": 12,
-      "title": "Wind",
-      "synopsis": "video about some other test",
-      "link": "https://www.youtube.com/embed/EpaLbYFVfbQ",
       "status": null,
-      "toDisplay": null
+      "idCategory": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Sci-fi"
+    },
+    {
+      "id": 2,
+      "title": "Horror"
+    },
+    {
+      "title": "Romance",
+      "id": 3
+    },
+    {
+      "title": "Animation",
+      "id": 4
+    },
+    {
+      "title": "Comedy",
+      "id": 5
+    },
+    {
+      "title": "Reality show",
+      "id": 6
     }
   ]
 }

@@ -11,3 +11,37 @@ p {
 button.hidden{
   display: none;
 }
+.example-margin {
+  margin: 10px;
+  
+}
+.black{
+  color: black;
+}
+
+.pink{
+  color: pink;
+  background-color: rgb(94, 42, 94);
+}
+.pink button{
+  background-color: rgb(94, 42, 94);
+  color: pink;
+}
+.pink td{
+  background-color: rgb(94, 42, 94);
+  color: pink;
+}
+.pink th{
+  background-color: rgb(94, 42, 94);
+  color: pink;
+}
+.pink input{
+  background-color: rgb(94, 42, 94);
+  color: pink;
+}
+
+.pink select{
+  background-color: rgb(244, 193, 248);
+  color: rgb(133, 64, 76);
+}
+

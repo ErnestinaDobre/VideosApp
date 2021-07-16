@@ -3,5 +3,6 @@ export class Video {
     title : string;
     synopsis : string;
     link : string;
-    status : any
+    status : any;
+    idCategory: number;
 }
